@@ -1,0 +1,79 @@
+a) create an inheritance example using typescript  
+Code:- 
+// parent class 
+class Vehicle { 
+brand: string; 
+speed: number; 
+constructor(brand: string, speed: number) { 
+this.brand = brand; 
+this.speed = speed; 
+} 
+start(): void { 
+console.log(this.brand + " is now ready to move"); 
+} 
+showSpeed(): void { 
+console.log("Current Velocity:", this.speed + " km/h"); 
+} 
+} 
+// child class 
+class Car extends Vehicle { 
+fuelType: string; 
+constructor(brand: string, speed: number, fuelType: string) { 
+super(brand, speed); // call parent constructor 
+this.fuelType = fuelType; 
+} 
+display(): void { 
+console.log("Manufacturer:", this.brand); 
+console.log("Runs on:", this.fuelType); 
+} 
+} 
+let myCar = new Car("Hyundai", 95, "Diesel"); 
+myCar.start(); 
+myCar.showSpeed(); 
+myCar.display();
+
+
+b) using typescript namespace  
+Code :- 
+Exp3.1.ts:- 
+namespace Mobility { 
+ 
+export class Machine { 
+    company: string; 
+ 
+    constructor(company: string) { 
+        this.company = company; 
+    } 
+ 
+    ignite(): void { 
+        console.log(this.company + " machine is now running."); 
+    } 
+} 
+ 
+} 
+Exp3.2.ts:- 
+/// <reference path="Exp3.1.ts" /> 
+ 
+namespace Mobility { 
+ 
+export class Bike extends Machine { 
+ 
+    engineType: string; 
+ 
+    constructor(company: string, engineType: string) { 
+        super(company); 
+        this.engineType = engineType; 
+    } 
+ 
+    details(): void { 
+        console.log("Company Name:", this.company); 
+        console.log("Engine Type:", this.engineType); 
+    } 
+} 
+ 
+} 
+ 
+let b1 = new Mobility.Bike("Honda", "Petrol"); 
+ 
+b1.ignite(); 
+b1.details();
