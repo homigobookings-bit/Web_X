@@ -1,0 +1,38 @@
+A)Create Small code snippets for program like Hello World  
+text.ts  
+let message: string = "Hello, World!"; 
+console.log(message);  
+text.js  
+Var message = "Hello, World!"; 
+console.log(message); 
+
+B) Using Typescript Array                                                                                    
+text.ts:  
+let marks: number[] = [70, 85, 90];  
+console.log(marks[2]);   
+console.log(marks[1]);   
+text.js:   
+var marks = [70, 85, 90];  
+console.log(marks[2]);  
+console.log(marks[1]);
+
+C) Using Typescript Objects  
+text.ts: 
+let student:   
+{   
+name: string;   
+rollno: number   
+} =  
+{  
+name: "Shreyas Patil",  
+rollno: 44  
+};  
+console.log(student.name);  
+console.log(student.rollno);                                                                                      
+text.js:  
+var student = { 
+name: "Shreyas Patil", 
+rollno: 44, 
+}; 
+console.log(student.name); 
+console.log(student.rollno); 
