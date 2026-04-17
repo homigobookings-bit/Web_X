@@ -1,0 +1,75 @@
+Code:- 
+const express = require("express"); 
+const { MongoClient, ObjectId } = require("mongodb"); 
+const app = express(); 
+app.use(express.json()); 
+const url = "mongodb://127.0.0.1:27017"; 
+const dbName = "SchoolDB_Exp9"; 
+let database; 
+// CONNECT DATABASE 
+MongoClient.connect(url) 
+.then(client => { 
+    database = client.db(dbName); 
+    console.log("Database Connected"); 
+}) 
+.catch(err => console.log("Connection Error:", err)); 
+ 
+ 
+// 🔹 CREATE (POST) 
+app.post("/students", async (req, res) => { 
+    try { 
+        const student = req.body; 
+        const result = await database.collection("students").insertOne(student); 
+        res.send({ message: "Student Added", result }); 
+    } catch (err) { 
+        res.status(500).send(err.message); 
+    } 
+}); 
+ 
+ 
+// 🔹 READ (GET) 
+app.get("/students", async (req, res) => { 
+    try { 
+        const students = await database.collection("students").find().toArray(); 
+        res.send(students); 
+    } catch (err) { 
+        res.status(500).send(err.message); 
+    } 
+}); 
+ 
+ 
+// 🔹 UPDATE (PUT) 
+app.put("/students/:id", async (req, res) => { 
+    try { 
+        const studentId = req.params.id; 
+ 
+        const result = await database.collection("students").updateOne( 
+            { _id: new ObjectId(studentId) }, 
+            { $set: req.body } 
+        ); 
+ 
+        res.send({ message: "Student Updated", result }); 
+    } catch (err) { 
+        res.status(500).send(err.message); 
+    } 
+}); 
+ 
+ 
+// 🔹 DELETE (DELETE) 
+app.delete("/students/:id", async (req, res) => { 
+    try { 
+        const studentId = req.params.id; 
+ 
+        const result = await database.collection("students").deleteOne( 
+            { _id: new ObjectId(studentId) } 
+        ); 
+ 
+        res.send({ message: "Student Deleted", result }); 
+    } catch (err) { 
+        res.status(500).send(err.message); 
+} 
+}); 
+// SERVER START 
+app.listen(5000, () => { 
+console.log("Server running at http://localhost:5000"); 
+});
