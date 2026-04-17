@@ -1,0 +1,66 @@
+index.html 
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>AJAX Search Demo</title> 
+ 
+    <script> 
+        function getSuggestions(input) { 
+ 
+            if (input.length === 0) { 
+                document.getElementById("output").innerHTML = ""; 
+                return; 
+            } 
+ 
+            let request = new XMLHttpRequest(); 
+ 
+            request.onreadystatechange = function () { 
+                if (this.readyState === 4 && this.status === 200) { 
+                    document.getElementById("output").innerHTML = this.responseText; 
+                } 
+            }; 
+ 
+            request.open("GET", "search.php?name=" + input, true); 
+            request.send(); 
+        } 
+    </script> 
+</head> 
+ 
+<body> 
+ 
+<h3>Type Student Name:</h3> 
+ 
+<input type="text" onkeyup="getSuggestions(this.value)" placeholder="Enter name"> 
+ 
+<p>Results: <span id="output"></span></p> 
+ 
+</body> 
+</html> 
+ 
+app.js 
+<?php 
+ 
+$name = $_GET['name'] ?? ""; 
+ 
+// NEW DATASET (different from original) 
+$students = ["Sanika", "Shreyas", "Rahul", "Priya", "Amit", "Neha", "Kunal", "Riya"]; 
+ 
+$hint = ""; 
+ 
+if ($name !== "") { 
+    $name = strtolower($name); 
+ 
+    foreach ($students as $student) { 
+        if (str_starts_with(strtolower($student), $name)) { 
+            if ($hint === "") { 
+                $hint = $student; 
+            } else { 
+                $hint .= ", " . $student; 
+            } 
+        } 
+    } 
+} 
+ 
+echo $hint === "" ? "No match found" : $hint; 
+ 
+?> 
