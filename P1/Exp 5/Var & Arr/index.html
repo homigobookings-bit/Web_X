@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <title>AngularJS Example</title>
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- External JS -->
+    <script src="app.js"></script>
+  </head>
+
+  <body ng-controller="MainController">
+    <h1>{{title}}</h1>
+    <h2>Student Name: {{studentName}}</h2>
+
+    <input type="text" ng-model="newSubject" placeholder="Enter subject" />
+    <button ng-click="addSubject()">Add Subject</button>
+
+    <h3>Subjects:</h3>
+    <ul>
+      <li ng-repeat="s in subjects">{{s}}</li>
+    </ul>
+  </body>
+</html>
