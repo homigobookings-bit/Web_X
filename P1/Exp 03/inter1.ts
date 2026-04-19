@@ -1,16 +1,16 @@
 namespace Academy {
 
     export class Person {
-        fullName: string;
+        name: string;
         id: number;
 
-        constructor(fullName: string, id: number) {
-            this.fullName = fullName;
+        constructor(name: string, id: number) {
+            this.name = name;
             this.id = id;
         }
 
-        joinSession(): void {
-            console.log(this.fullName + " has joined the session.");
+        showName(): void {
+            console.log(this.name + " is present.");
         }
     }
 
