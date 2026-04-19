@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Custom Directives Example</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+
+    <style>
+        .box {
+            border: 1px solid black;
+            padding: 10px;
+            width: 300px;
+        }
+        .highlight {
+            background: lightgray;
+            padding: 3px;
+        }
+    </style>
+</head>
+
+<body ng-controller="myCtrl">
+
+<my-box>
+
+    <p>BOX DIRECTIVE</p>
+
+    <p>TEXT DIRECTIVE</p>
+    <my-text></my-text>
+
+    <p>INPUT DIRECTIVE</p>
+    <my-input></my-input>
+
+    <p>OUTPUT</p>
+    <p>You Entered: {{userInput}}</p>
+
+</my-box>
+
+</body>
+</html>
