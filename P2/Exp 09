@@ -1,0 +1,51 @@
+const express = require("express");
+const { MongoClient, ObjectId } = require("mongodb");
+
+const app = express();
+app.use(express.json());
+
+const url = "mongodb://127.0.0.1:27017";
+const dbName = "StudentDB_New";
+
+let db;
+
+MongoClient.connect(url)
+.then(client => {
+    db = client.db(dbName);
+    console.log("Connected to Database");
+})
+.catch(err => console.log(err));
+
+
+app.post("/records", async (req, res) => {
+    const result = await db.collection("records").insertOne(req.body);
+    res.send({ message: "Record Added", result });
+});
+
+
+app.get("/records", async (req, res) => {
+    const data = await db.collection("records").find().toArray();
+    res.send(data);
+});
+
+
+app.put("/records/:id", async (req, res) => {
+    const result = await db.collection("records").updateOne(
+        { _id: new ObjectId(req.params.id) },
+        { $set: req.body }
+    );
+    res.send({ message: "Record Updated", result });
+});
+
+
+app.delete("/records/:id", async (req, res) => {
+    const result = await db.collection("records").deleteOne(
+        { _id: new ObjectId(req.params.id) }
+    );
+    res.send({ message: "Record Deleted", result });
+});
+
+
+app.listen(8001, () => {
+    console.log("Server running at http://localhost:8001");
+});
