@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Student Record Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body ng-controller="myCtrl">
+
+<h3>Student Record Form</h3>
+
+<table>
+    <tr>
+        <th>Sr No.</th>
+        <th>Col 1</th>
+        <th>Col 2</th>
+    </tr>
+
+    <tr>
+        <td>1</td>
+        <td>First Name</td>
+        <td><input type="text" ng-model="firstName"></td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>Last Name</td>
+        <td><input type="text" ng-model="lastName"></td>
+    </tr>
+
+    <tr>
+        <td>3</td>
+        <td>Full Name</td>
+        <td>{{firstName + ' ' + lastName}}</td>
+    </tr>
+
+    <tr>
+        <td>4</td>
+        <td>Subjects</td>
+        <td>
+            <table>
+                <tr>
+                    <th>Subject</th>
+                    <th>IA 1</th>
+                    <th>IA 2</th>
+                    <th>Average</th>
+                </tr>
+
+                <!-- LOOP -->
+                <tr ng-repeat="s in subjects">
+                    <td><input type="text" ng-model="s.name"></td>
+                    <td><input type="number" ng-model="s.ia1"></td>
+                    <td><input type="number" ng-model="s.ia2"></td>
+                    <td>{{ (s.ia1 + s.ia2) / 2 }}</td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+<br>
+<button>Submit</button>
+
+</body>
+</html>
